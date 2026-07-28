@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Reformulación — Estrategia de Debate Parlamentario Británico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --verde-camara: #0B4F35;
+  --verde-oscuro: #062E1F;
+  --verde-banca: #E9EFE6;
+  --pergamino: #F3EADC;
+  --pergamino-osc: #E6D9BE;
+  --roble: #3E2B1E;
+  --bronce: #B8925A;
+  --bronce-claro: #D8B984;
+  --tinta: #211A12;
+  --rojo-division: #8C2A34;
+  --sombra: rgba(33,26,18,0.18);
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background: var(--pergamino);
+  color: var(--tinta);
+  font-family: 'Source Serif 4', serif;
+  line-height:1.6;
+  background-image:
+    radial-gradient(circle at 15% 8%, rgba(184,146,90,0.08), transparent 40%),
+    radial-gradient(circle at 90% 85%, rgba(11,79,53,0.06), transparent 45%);
+}
+h1,h2,h3,.display{ font-family:'Fraunces', serif; letter-spacing:-0.01em; }
+.eyebrow{
+  font-family:'Space Mono', monospace;
+  font-size:0.72rem;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color: var(--verde-camara);
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow::before{ content:""; width:22px; height:1px; background: var(--bronce); display:inline-block; }
+
+/* NAV */
+nav{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background: var(--verde-oscuro);
+  border-bottom: 3px solid var(--bronce);
+  display:flex; align-items:center; justify-content:space-between;
+  padding: 14px clamp(20px,5vw,56px);
+}
+.brand{ color: var(--pergamino); font-family:'Fraunces', serif; font-weight:700; font-size:1.05rem; letter-spacing:0.02em; }
+.brand span{ color: var(--bronce-claro); }
+.navlinks{ display:flex; gap: clamp(14px,2vw,32px); }
+.navlinks a{
+  color: var(--verde-banca); text-decoration:none; font-family:'Space Mono',monospace;
+  font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; opacity:0.85;
+  border-bottom:1px solid transparent; padding-bottom:3px; transition: all .2s;
+}
+.navlinks a:hover{ opacity:1; border-color: var(--bronce-claro); }
+
+/* HERO */
+header.hero{
+  min-height: 92vh;
+  display:flex; flex-direction:column; justify-content:center;
+  padding: 140px clamp(20px,6vw,90px) 80px;
+  background: linear-gradient(180deg, var(--verde-camara) 0%, var(--verde-oscuro) 100%);
+  color: var(--pergamino);
+  position:relative;
+  overflow:hidden;
+  border-bottom: 6px solid var(--bronce);
+}
+header.hero::before{
+  content:"";
+  position:absolute; inset:0;
+  background-image: repeating-linear-gradient(180deg, rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px, transparent 1px, transparent 42px);
+  pointer-events:none;
+}
+.hero-inner{ max-width: 980px; position:relative; z-index:2; }
+.hero .eyebrow{ color: var(--bronce-claro); }
+.hero .eyebrow::before{ background: var(--bronce-claro); }
+h1.hero-title{
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  font-weight:600;
+  line-height:0.98;
+  margin: 22px 0 26px;
+  color: #FBF6EC;
+}
+h1.hero-title em{ font-style:italic; font-weight:500; color: var(--bronce-claro); }
+.hero-sub{
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  max-width: 620px;
+  color: rgba(251,246,236,0.86);
+  font-family:'Source Serif 4', serif;
+}
+.hero-meta{
+  margin-top:48px;
+  display:flex; gap: clamp(20px,4vw,56px); flex-wrap:wrap;
+  font-family:'Space Mono', monospace;
+  border-top: 1px solid rgba(216,185,132,0.35);
+  padding-top: 22px;
+}
+.hero-meta div{ font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase; color: rgba(251,246,236,0.6); }
+.hero-meta strong{ display:block; font-family:'Fraunces',serif; font-size:1.5rem; color:#FBF6EC; font-weight:600; text-transform:none; letter-spacing:0; margin-top:4px; }
+
+/* SECTIONS shared */
+section{ padding: 110px clamp(20px,6vw,90px); }
+.section-head{ max-width:720px; margin-bottom:56px; }
+.section-head h2{ font-size: clamp(2rem,3.6vw,3rem); margin-top:14px; font-weight:600; }
+.section-head p{ margin-top:16px; color:#4A3F2E; font-size:1.08rem; max-width:600px; }
+
+/* MECHANISM */
+#mecanismo{ background: var(--verde-banca); border-top:1px solid var(--pergamino-osc); border-bottom:1px solid var(--pergamino-osc); }
+.pasos{ display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:0; border:1px solid var(--verde-camara); }
+.paso{
+  padding: 34px 26px; background: var(--pergamino);
+  border-right: 1px solid var(--verde-camara);
+  position:relative;
+}
+.paso:last-child{ border-right:none; }
+.paso-num{ font-family:'Space Mono',monospace; font-size:0.75rem; color: var(--bronce); letter-spacing:0.1em; }
+.paso h3{ font-size:1.28rem; margin: 10px 0 10px; color: var(--verde-oscuro); }
+.paso p{ font-size:0.94rem; color:#4A3F2E; }
+.paso-arrow{ position:absolute; right:-13px; top:50%; transform:translateY(-50%); width:24px;height:24px;
+  background: var(--pergamino); border-right:1px solid var(--verde-camara); border-top:1px solid var(--verde-camara);
+  transform: translateY(-50%) rotate(45deg); z-index:3; display:none;
+}
+@media(min-width:900px){ .paso-arrow{ display:block; } }
+
+/* EXAMPLES */
+#ejemplos{ background: var(--pergamino); }
+.hansard{
+  background:#FBF6EC; border:1px solid var(--pergamino-osc); box-shadow: 0 10px 26px var(--sombra);
+  margin-bottom: 40px; overflow:hidden;
+}
+.hansard-head{
+  background: var(--verde-camara); color:#FBF6EC; padding:16px 28px;
+  display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px;
+}
+.hansard-head .moc-label{ font-family:'Space Mono',monospace; font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; opacity:0.8; }
+.hansard-head .moc-text{ font-family:'Fraunces',serif; font-size:1.15rem; font-weight:600; }
+.hansard-body{ padding: 28px 28px 8px; }
+.linea{ display:grid; grid-template-columns: 148px 1fr; gap: 18px; padding: 16px 0; border-top:1px dashed var(--pergamino-osc); }
+.linea:first-child{ border-top:none; }
+.quien{ font-family:'Space Mono',monospace; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--verde-camara); padding-top:3px; }
+.quien.rival{ color: var(--rojo-division); }
+.dicho{ font-size:1rem; color:#332A1C; }
+.dicho strong{ color: var(--verde-oscuro); }
+
+/* EXERCISES */
+#ejercicios{ background: var(--verde-oscuro); color: var(--pergamino); }
+#ejercicios .section-head p{ color: rgba(243,234,220,0.72); }
+#ejercicios .eyebrow{ color: var(--bronce-claro); }
+#ejercicios .eyebrow::before{ background:var(--bronce-claro); }
+.grid-ejercicios{ display:grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap:18px; }
+.orden{
+  background: var(--pergamino); color: var(--tinta);
+  border: 1px solid var(--bronce); position:relative;
+  padding: 22px 20px 22px 24px; cursor:pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+  display:flex; flex-direction:column; gap:10px; min-height:168px;
+}
+.orden::before{
+  content:""; position:absolute; left:0; top:10px; bottom:10px; width:4px; background: var(--verde-camara);
+}
+.orden:hover{ transform: translateY(-4px); box-shadow: 0 14px 26px rgba(0,0,0,0.35); }
+.orden-num{ font-family:'Space Mono',monospace; font-size:0.7rem; color: var(--verde-camara); letter-spacing:0.08em; display:flex; justify-content:space-between; align-items:center;}
+.orden-num .tag{ background: var(--verde-banca); color:var(--verde-camara); padding:2px 8px; border-radius:2px; font-size:0.62rem;}
+.orden h3{ font-family:'Fraunces',serif; font-size:1.06rem; font-weight:600; color: var(--verde-oscuro); line-height:1.25; }
+.orden .go{ margin-top:auto; font-family:'Space Mono',monospace; font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color: var(--roble); display:flex; align-items:center; gap:6px;}
+
+footer{
+  background: var(--verde-oscuro); color: rgba(243,234,220,0.55); text-align:center;
+  padding: 40px 20px; font-family:'Space Mono',monospace; font-size:0.7rem; letter-spacing:0.05em;
+  border-top: 3px solid var(--bronce);
+}
+
+/* MODAL - PRACTICE ROOM */
+.overlay{
+  position:fixed; inset:0; background: rgba(6,46,31,0.94); backdrop-filter: blur(2px);
+  z-index:200; display:none; align-items:center; justify-content:center; padding:24px;
+}
+.overlay.activo{ display:flex; }
+.sala{
+  background: var(--pergamino); width:100%; max-width: 780px; max-height:92vh; overflow-y:auto;
+  border: 2px solid var(--bronce); position:relative; box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+}
+.sala-top{
+  background: var(--verde-camara); color:#FBF6EC; padding: 18px 26px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.sala-top .moc-label{ font-family:'Space Mono',monospace; font-size:0.66rem; letter-spacing:0.1em; text-transform:uppercase; opacity:0.75; }
+.cerrar{
+  background:none; border: 1px solid rgba(251,246,236,0.5); color:#FBF6EC; width:30px; height:30px;
+  cursor:pointer; font-size:1rem; line-height:1; border-radius:50%; display:flex; align-items:center; justify-content:center;
+}
+.sala-body{ padding: 30px clamp(20px,4vw,42px) 38px; text-align:center; }
+.moc-full{ font-family:'Fraunces',serif; font-size:1.3rem; color:var(--verde-oscuro); margin: 4px 0 24px; font-weight:600;}
+.argumento-caja{
+  background:#FBF6EC; border:1px solid var(--pergamino-osc); border-left:4px solid var(--rojo-division);
+  padding: 22px 24px; text-align:left; margin-bottom: 34px;
+}
+.argumento-caja .quien.rival{ margin-bottom:8px; display:block; }
+.argumento-caja p{ font-size:1.12rem; color:#332A1C; }
+
+.timer-wrap{ display:flex; flex-direction:column; align-items:center; gap:18px; }
+.timer-digitos{
+  font-family:'Space Mono', monospace; font-weight:700;
+  font-size: clamp(3.4rem, 11vw, 5.2rem);
+  color: var(--verde-camara);
+  letter-spacing:0.02em;
+  transition: color .3s;
+}
+.timer-digitos.alerta{ color: var(--rojo-division); animation: pulso 1s infinite; }
+@keyframes pulso{ 0%,100%{opacity:1;} 50%{opacity:0.55;} }
+.barra{ width:100%; max-width:420px; height:6px; background: var(--pergamino-osc); position:relative; overflow:hidden; }
+.barra-fill{ position:absolute; left:0; top:0; bottom:0; width:100%; background: var(--verde-camara); transition: width 1s linear, background .3s; }
+.barra-fill.alerta{ background: var(--rojo-division); }
+.controles{ display:flex; gap:12px; margin-top:8px; flex-wrap:wrap; justify-content:center; }
+.btn{
+  font-family:'Space Mono',monospace; font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase;
+  padding: 13px 24px; border:1px solid var(--verde-camara); background:transparent; color:var(--verde-camara);
+  cursor:pointer; transition: all .2s;
+}
+.btn:hover{ background: var(--verde-camara); color:#FBF6EC; }
+.btn.primario{ background: var(--verde-camara); color:#FBF6EC; }
+.btn.primario:hover{ background: var(--verde-oscuro); }
+.btn.siguiente{ border-color: var(--bronce); color: var(--roble); }
+.btn.siguiente:hover{ background: var(--bronce); color:#FBF6EC; }
+.recordatorio{ margin-top:22px; font-size:0.85rem; color:#6b5c42; font-style:italic; max-width:440px; }
+
+@media(max-width:640px){
+  .navlinks{ display:none; }
+  section{ padding: 80px 20px; }
+  .linea{ grid-template-columns: 1fr; gap:4px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">La <span>Reformulación</span></div>
+  <div class="navlinks">
+    <a href="#que-es">Qué es</a>
+    <a href="#mecanismo">Mecanismo</a>
+    <a href="#ejemplos">Ejemplos</a>
+    <a href="#ejercicios">Practicar</a>
+  </div>
+</nav>
+
+<header class="hero" id="que-es">
+  <div class="hero-inner">
+    <div class="eyebrow">Debate Parlamentario Británico</div>
+    <h1 class="hero-title">No niegues el<br><em>argumento rival</em>.<br>Reformúlalo.</h1>
+    <p class="hero-sub">La reformulación es la técnica de refutación que toma el argumento del equipo contrario, lo valida en lo que tiene de cierto, le cambia el marco — y lo devuelve convertido en evidencia a favor de tu propio caso. No es negar; es capturar.</p>
+    <div class="hero-meta">
+      <div>Etapas del método <strong>4</strong></div>
+      <div>Ejemplos resueltos <strong>2</strong></div>
+      <div>Ejercicios de práctica <strong>12</strong></div>
+      <div>Tiempo por turno <strong>3:00</strong></div>
+    </div>
+  </div>
+</header>
+
+<section id="mecanismo">
+  <div class="section-head">
+    <div class="eyebrow">El mecanismo</div>
+    <h2>Cuatro movimientos, en orden</h2>
+    <p>La reformulación funciona porque sigue una secuencia fija. Saltarse un paso — sobre todo la validación — hace que suene a que estás ignorando al rival en vez de venciéndolo.</p>
+  </div>
+  <div class="pasos">
+    <div class="paso">
+      <div class="paso-num">01 — Escuchar</div>
+      <h3>Parafrasea</h3>
+      <p>Repite el argumento rival con tus propias palabras, en una frase. Le muestras al jurado que entendiste lo que dijeron — y no lo que quisiste entender.</p>
+      <div class="paso-arrow"></div>
+    </div>
+    <div class="paso">
+      <div class="paso-num">02 — Validar</div>
+      <h3>Concede lo cierto</h3>
+      <p>Admite la parte del argumento que efectivamente es verdad. Esto te da credibilidad y evita que suene a negación automática.</p>
+      <div class="paso-arrow"></div>
+    </div>
+    <div class="paso">
+      <div class="paso-num">03 — Reencuadrar</div>
+      <h3>Cambia el marco</h3>
+      <p>Muestra que el mismo hecho, visto desde otro ángulo o otra causa, apunta a una conclusión distinta a la que el rival quería.</p>
+      <div class="paso-arrow"></div>
+    </div>
+    <div class="paso">
+      <div class="paso-num">04 — Redirigir</div>
+      <h3>Conecta a tu caso</h3>
+      <p>Cierra mostrando que ese argumento reencuadrado ahora sostiene tu moción, no la del rival. El punto cambió de dueño.</p>
+    </div>
+  </div>
+</section>
+
+<section id="ejemplos">
+  <div class="section-head">
+    <div class="eyebrow">Ejemplos resueltos</div>
+    <h2>Cómo suena en una ronda real</h2>
+    <p>Dos casos completos, aplicando los cuatro movimientos paso a paso sobre un argumento real del equipo contrario.</p>
+  </div>
+
+  <div class="hansard">
+    <div class="hansard-head">
+      <span class="moc-label">Moción</span>
+      <span class="moc-text">Esta Cámara prohibiría los teléfonos móviles en las salas de clase</span>
+    </div>
+    <div class="hansard-body">
+      <div class="linea">
+        <span class="quien rival">Rival dice</span>
+        <p class="dicho">"Los celulares son herramientas educativas valiosas, y prohibirlos nos quita acceso a la tecnología del futuro."</p>
+      </div>
+      <div class="linea">
+        <span class="quien">01 Parafraseo</span>
+        <p class="dicho">"Mi rival plantea que el celular es la puerta de entrada a las herramientas del futuro."</p>
+      </div>
+      <div class="linea">
+        <span class="quien">02 Validación</span>
+        <p class="dicho">"Y tiene razón en algo: la tecnología en el aula, bien usada, puede ser poderosa."</p>
+      </div>
+      <div class="linea">
+        <span class="quien">03 Reencuadre</span>
+        <p class="dicho">"Pero el problema nunca fue la tecnología — fue el diseño. El celular no fue diseñado para enseñar, fue diseñado para capturar atención de forma indefinida. Ese es literalmente su modelo de negocio."</p>
+      </div>
+      <div class="linea">
+        <span class="quien">04 Redirección</span>
+        <p class="dicho"><strong>"Por eso esta Cámara no está en contra de la tecnología educativa — está a favor de herramientas diseñadas para aprender, no para distraer. Y eso es exactamente lo que propone nuestra moción."</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="hansard">
+    <div class="hansard-head">
+      <span class="moc-label">Moción</span>
+      <span class="moc-text">Esta Cámara aumentaría los impuestos a las grandes fortunas</span>
+    </div>
+    <div class="hansard-body">
+      <div class="linea">
+        <span class="quien rival">Rival dice</span>
+        <p class="dicho">"Subir los impuestos a los más ricos hará que se vayan del país, y perderemos inversión y empleo."</p>
+      </div>
+      <div class="linea">
+        <span class="quien">01 Parafraseo</span>
+        <p class="dicho">"El argumento es que gravar más a las grandes fortunas provoca una fuga de capitales."</p>
+      </div>
+      <div class="linea">
+        <span class="quien">02 Validación</span>
+        <p class="dicho">"Es cierto que el capital es móvil y que los incentivos importan — eso no lo vamos a negar."</p>
+      </div>
+      <div class="linea">
+        <span class="quien">03 Reencuadre</span>
+        <p class="dicho">"Pero esa misma movilidad es la prueba del problema, no del riesgo: hoy el sistema ya permite a los más ricos elegir cuánto aportar, mientras la clase media no tiene esa opción. La asimetría es el punto, no el impuesto."</p>
+      </div>
+      <div class="linea">
+        <span class="quien">04 Redirección</span>
+        <p class="dicho"><strong>"Por eso esta Cámara no busca ahuyentar la inversión — busca cerrar esa asimetría, para que todos, móviles o no, aporten según su capacidad real."</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ejercicios">
+  <div class="section-head">
+    <div class="eyebrow">Sala de práctica</div>
+    <h2>12 ejercicios de improvisación</h2>
+    <p>Elige una moción. Vas a ver el argumento del rival y un cronómetro de 3 minutos. Usa todo el tiempo: parafrasea, valida, reencuadra y redirige en voz alta, en vivo, sin guion escrito.</p>
+  </div>
+  <div class="grid-ejercicios" id="grid-ejercicios"></div>
+</section>
+
+<footer>ESTRATEGIA DE REFORMULACIÓN — PRÁCTICA DE DEBATE PARLAMENTARIO BRITÁNICO</footer>
+
+<div class="overlay" id="overlay">
+  <div class="sala">
+    <div class="sala-top">
+      <span class="moc-label" id="modal-moc-label">Moción — Ejercicio 01</span>
+      <button class="cerrar" id="cerrar" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="sala-body">
+      <div class="moc-full" id="modal-mocion"></div>
+      <div class="argumento-caja">
+        <span class="quien rival">Rival dice</span>
+        <p id="modal-argumento"></p>
+      </div>
+      <div class="timer-wrap">
+        <div class="timer-digitos" id="timer-digitos">3:00</div>
+        <div class="barra"><div class="barra-fill" id="barra-fill"></div></div>
+        <div class="controles">
+          <button class="btn primario" id="btn-start">Iniciar</button>
+          <button class="btn" id="btn-pausa">Pausar</button>
+          <button class="btn" id="btn-reset">Reiniciar</button>
+          <button class="btn siguiente" id="btn-siguiente">Siguiente ejercicio →</button>
+        </div>
+        <p class="recordatorio">Recuerda: no te apures a rebatir. Parafrasea, valida, reencuadra y redirige — y usa los 3 minutos completos para desarrollar tu idea.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const ejercicios = [
+  { mocion: "Esta Cámara aboliría los exámenes estandarizados.",
+    argumento: "Sin exámenes estandarizados no hay forma objetiva de comparar el rendimiento de los estudiantes a nivel nacional." },
+  { mocion: "Esta Cámara prohibiría la publicidad dirigida a menores de edad.",
+    argumento: "Las marcas tienen derecho a comunicar sus productos a cualquier público, y prohibirlo es censura comercial." },
+  { mocion: "Esta Cámara implementaría una renta básica universal.",
+    argumento: "Dar dinero sin exigir trabajo a cambio desincentiva el esfuerzo y la productividad de las personas." },
+  { mocion: "Esta Cámara prohibiría las redes sociales para menores de 16 años.",
+    argumento: "Los padres, no el Estado, son quienes deben decidir qué consumen sus hijos." },
+  { mocion: "Esta Cámara aboliría la pena de muerte en todos los países.",
+    argumento: "Algunos crímenes son tan graves que la única justicia proporcional es la muerte del culpable." },
+  { mocion: "Esta Cámara haría obligatorio un año de servicio social juvenil.",
+    argumento: "Obligar a los jóvenes a servir viola su libertad individual de elegir su propio camino." },
+  { mocion: "Esta Cámara aboliría las herencias por encima de cierto monto.",
+    argumento: "El dinero que una persona ganó legítimamente le pertenece, y tiene derecho a dárselo a quien quiera." },
+  { mocion: "Esta Cámara prohibiría los combustibles fósiles a partir de 2040.",
+    argumento: "Una transición tan rápida destruiría economías enteras y dejaría a millones de personas sin trabajo." },
+  { mocion: "Esta Cámara permitiría la eutanasia voluntaria en todos los casos terminales.",
+    argumento: "Legalizar la eutanasia abre la puerta a presionar implícitamente a los enfermos vulnerables a 'no ser una carga'." },
+  { mocion: "Esta Cámara eliminaría las tareas escolares para la casa.",
+    argumento: "Sin tareas, los estudiantes pierden la disciplina de estudio independiente que van a necesitar toda su vida." },
+  { mocion: "Esta Cámara regularía estrictamente el uso de inteligencia artificial en el trabajo.",
+    argumento: "Regular demasiado pronto frena la innovación y deja a nuestro país atrás frente a otros que no regulan." },
+  { mocion: "Esta Cámara declararía ilegal el uso de animales en la investigación científica.",
+    argumento: "Sin experimentación animal, muchos avances médicos que salvan vidas humanas nunca habrían sido posibles." }
+];
+
+const grid = document.getElementById('grid-ejercicios');
+ejercicios.forEach((ej, i) => {
+  const card = document.createElement('div');
+  card.className = 'orden';
+  card.innerHTML = `
+    <div class="orden-num"><span>ORDEN N.º ${String(i+1).padStart(2,'0')}</span><span class="tag">3:00</span></div>
+    <h3>${ej.mocion}</h3>
+    <div class="go">Abrir ejercicio →</div>
+  `;
+  card.addEventListener('click', () => abrirSala(i));
+  grid.appendChild(card);
+});
+
+const overlay = document.getElementById('overlay');
+const modalMocLabel = document.getElementById('modal-moc-label');
+const modalMocion = document.getElementById('modal-mocion');
+const modalArgumento = document.getElementById('modal-argumento');
+const timerDigitos = document.getElementById('timer-digitos');
+const barraFill = document.getElementById('barra-fill');
+const btnStart = document.getElementById('btn-start');
+const btnPausa = document.getElementById('btn-pausa');
+const btnReset = document.getElementById('btn-reset');
+const btnSiguiente = document.getElementById('btn-siguiente');
+
+const DURACION = 180;
+let indiceActual = 0;
+let segundosRestantes = DURACION;
+let intervalo = null;
+
+function formatear(s){
+  const m = Math.floor(s/60);
+  const ss = String(s%60).padStart(2,'0');
+  return `${m}:${ss}`;
+}
+
+function actualizarVisual(){
+  timerDigitos.textContent = formatear(segundosRestantes);
+  const pct = (segundosRestantes/DURACION)*100;
+  barraFill.style.width = pct + '%';
+  const alerta = segundosRestantes <= 20;
+  timerDigitos.classList.toggle('alerta', alerta);
+  barraFill.classList.toggle('alerta', alerta);
+}
+
+function abrirSala(i){
+  indiceActual = i;
+  const ej = ejercicios[i];
+  modalMocLabel.textContent = `Moción — Ejercicio ${String(i+1).padStart(2,'0')} de 12`;
+  modalMocion.textContent = ej.mocion;
+  modalArgumento.textContent = ej.argumento;
+  resetTimer();
+  overlay.classList.add('activo');
+}
+
+function cerrarSala(){
+  overlay.classList.remove('activo');
+  pausarTimer();
+}
+
+function iniciarTimer(){
+  if(intervalo) return;
+  intervalo = setInterval(() => {
+    if(segundosRestantes > 0){
+      segundosRestantes--;
+      actualizarVisual();
+    } else {
+      pausarTimer();
+    }
+  }, 1000);
+}
+
+function pausarTimer(){
+  clearInterval(intervalo);
+  intervalo = null;
+}
+
+function resetTimer(){
+  pausarTimer();
+  segundosRestantes = DURACION;
+  actualizarVisual();
+}
+
+btnStart.addEventListener('click', iniciarTimer);
+btnPausa.addEventListener('click', pausarTimer);
+btnReset.addEventListener('click', resetTimer);
+document.getElementById('cerrar').addEventListener('click', cerrarSala);
+overlay.addEventListener('click', (e) => { if(e.target === overlay) cerrarSala(); });
+btnSiguiente.addEventListener('click', () => {
+  const siguiente = (indiceActual + 1) % ejercicios.length;
+  abrirSala(siguiente);
+});
+
+actualizarVisual();
+</script>
+
+</body>
+</html>
